@@ -97,19 +97,22 @@ public class Movement : MonoBehaviour {
             Blast();
         }
 
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
         if (gravityDir == 0)
         {
-            movement = new Vector3(Input.GetAxis("Horizontal"), verticalMovement, Input.GetAxis("Vertical"));
+            movement = new Vector3(horizontal, verticalMovement, vertical);
             movement = Quaternion.Euler(0, 45, 0) * movement;
         }
         else if (gravityDir == 1)
         {
-            movement = new Vector3(-verticalMovement, -Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+            movement = new Vector3(-verticalMovement, -vertical, horizontal);
             movement = Quaternion.Euler(-45, 0, 0) * movement;
         }
         else if (gravityDir == 2)
         {
-            movement = new Vector3(Input.GetAxis("Vertical"), -Input.GetAxis("Horizontal"), -verticalMovement);
+            movement = new Vector3(vertical, -horizontal, -verticalMovement);
             movement = Quaternion.Euler(0, 0, -45) * movement;
         }
         //movement = transform.TransformDirection(movement);
@@ -156,7 +159,7 @@ public class Movement : MonoBehaviour {
        
         if (Physics.Raycast(transform.position, dir, out hit,0.7f))
         {
-            if (hit.transform.tag != "Danger")
+            if (hit.transform.tag == "Ground")
                 return true;
             else
                 return false;
@@ -167,18 +170,26 @@ public class Movement : MonoBehaviour {
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Platform")
-        {
-            transform.parent = other.transform;
-        }
         if (other.tag == "Danger")
             Die();
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Platform" && IsGrounded())
+        {
+            transform.parent = other.transform.parent;
+        }
+        else
+            transform.parent = null;
+    }
+
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Platform")
             transform.parent = null;
     }
+    
 
 }
