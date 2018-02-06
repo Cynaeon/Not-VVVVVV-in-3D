@@ -8,11 +8,13 @@ public class CameraFollow : MonoBehaviour {
     public float rotationSpeed;
     public float multiplier = 1;
 
+    private Gravity _gravity;
     private Vector3 offset;
     private Vector3 targetRot;
 
     private void Start()
     {
+        _gravity = GameObject.Find("Gravity").GetComponent<Gravity>();
         offset = transform.position - target.position;
     }
 
@@ -23,15 +25,15 @@ public class CameraFollow : MonoBehaviour {
             transform.position = Vector3.Lerp(transform.position, target.position + offset * multiplier, 0.1f);
         }
 
-        if (target.GetComponent<Movement>().gravityDir == 0)
+        if (_gravity.direction == 0)
         {
             targetRot = new Vector3(45, 45, 0);
         }
-        else if (target.GetComponent<Movement>().gravityDir == 1)
+        else if (_gravity.direction == 1)
         {
             targetRot = new Vector3(30, 55, 125);
         }
-        else if (target.GetComponent<Movement>().gravityDir == 2)
+        else if (_gravity.direction == 2)
         {
             targetRot = new Vector3(30, 35, 235);
         }
@@ -44,9 +46,9 @@ public class CameraFollow : MonoBehaviour {
                 multiplier = 1;
         }
 
-        if (Vector3.Distance(transform.eulerAngles, targetRot) > 0.5f)
+        if (Vector3.Distance(transform.eulerAngles, targetRot) > 0.1f)
         {
-            transform.eulerAngles = AngleLerp(transform.rotation.eulerAngles, targetRot, Time.deltaTime * 3);
+            transform.eulerAngles = AngleLerp(transform.rotation.eulerAngles, targetRot, Time.deltaTime * 4);
         }
         else
         {

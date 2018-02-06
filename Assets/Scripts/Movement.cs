@@ -7,8 +7,9 @@ public class Movement : MonoBehaviour {
 
     public float speed;
     public float jumpForce;
-    public float gravity;
+    public float gravityPull;
     public int midairJumps;
+    public float blastActiveTime;
 
     public GameObject blastTrigger;
     public GameObject trail;
@@ -23,13 +24,15 @@ public class Movement : MonoBehaviour {
     private float respawnTime = 1;
     private float freezeTime = 0.5f;
     private float timeDead;
+    private float timeBlast;
+    private Gravity _gravity;
     private CharacterController _controller;
     [SerializeField] private Vector3 movement;
     private float verticalMovement;
-    public int gravityDir;
 
     void Start()
     {
+        _gravity = GameObject.Find("Gravity").GetComponent<Gravity>();
         _controller = GetComponent<CharacterController>();
         blastTrigger.SetActive(false);
     }
@@ -59,25 +62,21 @@ public class Movement : MonoBehaviour {
     {
         if (IsGrounded())
         {
+            // Reset vertical movement and jump count and allow gravity changing
             if (verticalMovement < 0)
                 verticalMovement = 0;
             midairJumpCount = 0;
 
             if (Input.GetButtonDown("GravityRight"))
-            {
-                gravityDir++;
-                if (gravityDir > 2)
-                    gravityDir = 0;
-            }
+                _gravity.ChangeClockwise();
             else if (Input.GetButtonDown("GravityLeft"))
-            {
-                gravityDir--;
-                if (gravityDir < 0)
-                    gravityDir = 2;
-            }
+                _gravity.ChangeCounterclockwise();
         }
         else
-            verticalMovement -= gravity * Time.deltaTime;
+        {
+            // Apply gravity
+            verticalMovement -= gravityPull * Time.deltaTime;
+        }
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -93,28 +92,54 @@ public class Movement : MonoBehaviour {
 
         if (Input.GetButtonDown("Blast"))
         {
-            blastTrigger.SetActive(true);
             Blast();
+        }
+
+        if (blastTrigger.activeSelf)
+        {
+            timeBlast += Time.deltaTime;
+            if (timeBlast >= blastActiveTime)
+            {
+                timeBlast = 0;
+                blastTrigger.SetActive(false);
+            }
         }
 
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        if (gravityDir == 0)
+        switch (_gravity.direction)
+        {
+            case 0:
+                movement = new Vector3(horizontal, verticalMovement, vertical);
+                movement = Quaternion.Euler(0, 45, 0) * movement;
+                break;
+            case 1:
+                movement = new Vector3(-verticalMovement, -vertical, horizontal);
+                movement = Quaternion.Euler(-45, 0, 0) * movement;
+                break;
+            case 2:
+                movement = new Vector3(vertical, -horizontal, -verticalMovement);
+                movement = Quaternion.Euler(0, 0, -45) * movement;
+                break;
+        }
+        /*
+        if (_gravity.direction == 0)
         {
             movement = new Vector3(horizontal, verticalMovement, vertical);
             movement = Quaternion.Euler(0, 45, 0) * movement;
         }
-        else if (gravityDir == 1)
+        else if (_gravity.direction == 1)
         {
             movement = new Vector3(-verticalMovement, -vertical, horizontal);
             movement = Quaternion.Euler(-45, 0, 0) * movement;
         }
-        else if (gravityDir == 2)
+        else if (_gravity.direction == 2)
         {
             movement = new Vector3(vertical, -horizontal, -verticalMovement);
             movement = Quaternion.Euler(0, 0, -45) * movement;
         }
+        */
         //movement = transform.TransformDirection(movement);
         //movement = Camera.main.transform.TransformVector(move);
         //movement.y = 0;
@@ -124,7 +149,9 @@ public class Movement : MonoBehaviour {
 
     private void Blast()
     {
-        Instantiate(particlesBlast, transform.position, Quaternion.identity);
+        blastTrigger.SetActive(true);
+        ParticleSystem blast = Instantiate(particlesBlast, transform.position, Quaternion.identity);
+        blast.transform.parent = transform;
     }
 
     private void Die()
@@ -142,22 +169,22 @@ public class Movement : MonoBehaviour {
         GetComponent<Renderer>().enabled = true;
         trail.SetActive(true);
         transform.position = new Vector3(-10, 1, -10);
-        gravityDir = 0;
+        _gravity.direction = 0;
     }
 
     private bool IsGrounded()
     {
         Vector3 dir = Vector3.zero;
-        if (gravityDir == 0)
+        if (_gravity.direction == 0)
             dir = Vector3.down;
-        else if (gravityDir == 1)
+        else if (_gravity.direction == 1)
             dir = Vector3.right;
-        else if (gravityDir == 2)
+        else if (_gravity.direction == 2)
             dir = Vector3.forward;
 
         RaycastHit hit;
        
-        if (Physics.Raycast(transform.position, dir, out hit,0.7f))
+        if (Physics.Raycast(transform.position, dir, out hit, 0.7f))
         {
             if (hit.transform.tag == "Ground")
                 return true;

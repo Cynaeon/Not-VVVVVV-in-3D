@@ -467,13 +467,15 @@ GameObject:
   - component: {fileID: 490427686}
   - component: {fileID: 490427685}
   - component: {fileID: 490427684}
+  - component: {fileID: 490427687}
+  - component: {fileID: 490427688}
   m_Layer: 0
-  m_Name: Block
+  m_Name: PushBlock
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &490427683
 Transform:
   m_ObjectHideFlags: 0
@@ -501,7 +503,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0efd212446b61c746b2315cad71a5160, type: 2}
+  - {fileID: 2100000, guid: 7802ac3c01e29b349af3662666ccdf45, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -540,6 +542,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 490427682}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &490427687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 490427682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73263b7cd470db0489dc2b9118abb52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8
+  particles_push: {fileID: 198063972601065752, guid: 8ec258955943a4b4eb77987372e48aae,
+    type: 2}
+--- !u!54 &490427688
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 490427682}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &498553271
 Prefab:
   m_ObjectHideFlags: 0

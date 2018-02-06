@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 198253202083811036}
   - component: {fileID: 199135550557787644}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,15 +267,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 11
   jumpForce: 2
-  gravity: 10
+  gravityPull: 10
   midairJumps: 0
+  blastActiveTime: 0.2
   blastTrigger: {fileID: 1325275000427420}
+  trail: {fileID: 1949095253456928}
   particlesBlast: {fileID: 198545821421889882, guid: 994edbd296b278e4eb7c0609e5f00617,
     type: 2}
   particlesJump: {fileID: 198143271899362510, guid: ea4b39a49bf2d2e44a5f9eb5365074cc,
     type: 2}
+  particlesBuildUp: {fileID: 198697182430070154, guid: 9df3e0bf4176d7045a1a0f03faad18b8,
+    type: 2}
+  particlesDeath: {fileID: 198653729539623092, guid: 08e3f79fbd5b51444a52c6fdd9c19e61,
+    type: 2}
   movement: {x: 0, y: 0, z: 0}
-  gravityDir: 0
 --- !u!135 &135981022508143244
 SphereCollider:
   m_ObjectHideFlags: 1
