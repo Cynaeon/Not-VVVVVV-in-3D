@@ -8,6 +8,8 @@ TagManager:
   - Blast
   - Platform
   - Danger
+  - PushPanel
+  - PickUp
   layers:
   - Default
   - TransparentFX

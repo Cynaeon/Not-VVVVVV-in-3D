@@ -7,34 +7,56 @@ public class PushBlock : MonoBehaviour {
     public float speed;
     public ParticleSystem particles_push;
 
+    private bool moving;
     private Vector3 moveTarget;
+    private Gravity _gravity;
 
 	void Start () {
         moveTarget = transform.position;
+        _gravity = FindObjectOfType<Gravity>();
 	}
 	
 	void Update () {
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, moveTarget, step);
+        if (transform.position == moveTarget)
+            moving = false;
     }
 
     private void Push(Vector3 dir)
     {
-        
-        moveTarget += dir * 2;
+        RaycastHit hit;
+
+        // Dismiss if going to move against the gravity (i.e. into the air)
+        if (Vector3.Dot(dir, _gravity.direction) == 1)
+            return;
+
+        // Dismiss if going to go through a solid obstacle
+        if (Physics.Raycast(transform.position, dir, out hit, 1.5f))
+            return;
+
+        Vector3 dirAngledDown = (dir + (_gravity.direction / 1.3f)) * 2;
+        Debug.DrawRay(transform.position, dirAngledDown, Color.red, 1.5f);
+
+        if (Physics.Raycast(transform.position, dirAngledDown, out hit, 2f))
+        {
+            if (hit.transform.tag == "PushPanel")
+            {
+                moveTarget += dir * 2;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Blast")
+        if (!moving && other.tag == "Blast")
         {
             Vector3 dir = transform.position - other.transform.position;
             dir = SnapToCardinalDir(dir);
             Push(dir);
-
+            moving = true;
             Vector3 pos = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-            Instantiate(particles_push, pos, Quaternion.identity);
-            Debug.DrawRay(transform.position, dir, Color.green, 2);
+            Instantiate(particles_push, pos, Quaternion.LookRotation(-dir));
         }
     }
 

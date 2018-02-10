@@ -108,7 +108,7 @@ public class Movement : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        switch (_gravity.direction)
+        switch (_gravity.dirNumber)
         {
             case 0:
                 movement = new Vector3(horizontal, verticalMovement, vertical);
@@ -123,26 +123,6 @@ public class Movement : MonoBehaviour {
                 movement = Quaternion.Euler(0, 0, -45) * movement;
                 break;
         }
-        /*
-        if (_gravity.direction == 0)
-        {
-            movement = new Vector3(horizontal, verticalMovement, vertical);
-            movement = Quaternion.Euler(0, 45, 0) * movement;
-        }
-        else if (_gravity.direction == 1)
-        {
-            movement = new Vector3(-verticalMovement, -vertical, horizontal);
-            movement = Quaternion.Euler(-45, 0, 0) * movement;
-        }
-        else if (_gravity.direction == 2)
-        {
-            movement = new Vector3(vertical, -horizontal, -verticalMovement);
-            movement = Quaternion.Euler(0, 0, -45) * movement;
-        }
-        */
-        //movement = transform.TransformDirection(movement);
-        //movement = Camera.main.transform.TransformVector(move);
-        //movement.y = 0;
         movement *= speed;
         _controller.Move(movement * Time.deltaTime);
     }
@@ -169,24 +149,18 @@ public class Movement : MonoBehaviour {
         GetComponent<Renderer>().enabled = true;
         trail.SetActive(true);
         transform.position = new Vector3(-10, 1, -10);
-        _gravity.direction = 0;
+        _gravity.dirNumber = 0;
     }
 
     private bool IsGrounded()
     {
-        Vector3 dir = Vector3.zero;
-        if (_gravity.direction == 0)
-            dir = Vector3.down;
-        else if (_gravity.direction == 1)
-            dir = Vector3.right;
-        else if (_gravity.direction == 2)
-            dir = Vector3.forward;
+        Vector3 dir = _gravity.direction;
 
         RaycastHit hit;
        
         if (Physics.Raycast(transform.position, dir, out hit, 0.7f))
         {
-            if (hit.transform.tag == "Ground")
+            if (hit.transform.tag == "Ground" || hit.transform.tag == "PushPanel")
                 return true;
             else
                 return false;
@@ -199,10 +173,15 @@ public class Movement : MonoBehaviour {
     {
         if (other.tag == "Danger")
             Die();
+        if (other.tag == "PickUp")
+        {
+            other.GetComponent<GoalSphere>().ChargeStart();
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
+
         if (other.tag == "Platform" && IsGrounded())
         {
             transform.parent = other.transform.parent;
@@ -216,6 +195,8 @@ public class Movement : MonoBehaviour {
     {
         if (other.tag == "Platform")
             transform.parent = null;
+        if (other.tag == "PickUp")
+            other.GetComponent<GoalSphere>().ChargeStop();
     }
     
 

@@ -18,7 +18,7 @@ public class GravityBlock : MonoBehaviour {
 	void Update () {
         Vector3 target = Vector3.zero;
 
-        switch (_gravity.direction)
+        switch (_gravity.dirNumber)
         {
             case 0:
                 target = new Vector3(0, -1, 0);

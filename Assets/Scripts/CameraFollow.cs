@@ -14,6 +14,7 @@ public class CameraFollow : MonoBehaviour {
 
     private void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         _gravity = GameObject.Find("Gravity").GetComponent<Gravity>();
         offset = transform.position - target.position;
     }
@@ -25,15 +26,15 @@ public class CameraFollow : MonoBehaviour {
             transform.position = Vector3.Lerp(transform.position, target.position + offset * multiplier, 0.1f);
         }
 
-        if (_gravity.direction == 0)
+        if (_gravity.dirNumber == 0)
         {
             targetRot = new Vector3(45, 45, 0);
         }
-        else if (_gravity.direction == 1)
+        else if (_gravity.dirNumber == 1)
         {
             targetRot = new Vector3(30, 55, 125);
         }
-        else if (_gravity.direction == 2)
+        else if (_gravity.dirNumber == 2)
         {
             targetRot = new Vector3(30, 35, 235);
         }
@@ -48,7 +49,7 @@ public class CameraFollow : MonoBehaviour {
 
         if (Vector3.Distance(transform.eulerAngles, targetRot) > 0.1f)
         {
-            transform.eulerAngles = AngleLerp(transform.rotation.eulerAngles, targetRot, Time.deltaTime * 4);
+            transform.eulerAngles = AngleLerp(transform.rotation.eulerAngles, targetRot, Time.deltaTime * rotationSpeed);
         }
         else
         {

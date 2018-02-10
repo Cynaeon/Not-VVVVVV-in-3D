@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class Gravity : MonoBehaviour {
 
-    public int direction;
+    public int dirNumber;
+    public Vector3 direction;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
 	void Update () {
-		
+        if (dirNumber == 0)
+            direction = Vector3.down;
+        else if (dirNumber == 1)
+            direction = Vector3.right;
+        else if (dirNumber == 2)
+            direction = Vector3.forward;
 	}
 
     public void ChangeClockwise()
     {
-        direction++;
-        if (direction > 2)
-            direction = 0;
+        dirNumber++;
+        if (dirNumber > 2)
+            dirNumber = 0;
     }
 
     public void ChangeCounterclockwise()
     {
-        direction--;
-        if (direction < 0)
-            direction = 2;
+        dirNumber--;
+        if (dirNumber < 0)
+            dirNumber = 2;
     }
 }
