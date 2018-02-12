@@ -909,6 +909,11 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 995360364}
+    - target: {fileID: 20737312251221890, guid: 6f351d014d32ab147867621ac7073660,
+        type: 2}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f351d014d32ab147867621ac7073660, type: 2}
   m_IsPrefabParent: 0

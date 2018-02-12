@@ -48,6 +48,7 @@ public class GoalSphere : MonoBehaviour {
     {
         Instantiate(p_feathers, transform.position, Quaternion.identity);
         Instantiate(p_blast, transform.position, Quaternion.identity);
+        EventManager.TriggerEvent("levelCleared");
         Destroy(gameObject);
     }
 }

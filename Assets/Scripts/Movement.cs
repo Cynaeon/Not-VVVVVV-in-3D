@@ -21,13 +21,11 @@ public class Movement : MonoBehaviour {
     private bool hasJumped;
     private bool dead;
     private int midairJumpCount;
-    private float respawnTime = 1;
+    private float respawnTime = 0.5f;
     private float freezeTime = 0.5f;
-    private float timeDead;
-    private float timeBlast;
     private Gravity _gravity;
     private CharacterController _controller;
-    [SerializeField] private Vector3 movement;
+    private Vector3 movement;
     private float verticalMovement;
 
     void Start()
@@ -41,25 +39,14 @@ public class Movement : MonoBehaviour {
 
         if (!dead)
             PlayerInput();
-        else
-        {
-            timeDead += Time.unscaledDeltaTime;
-            if (Time.timeScale == 0 && timeDead >= respawnTime / 2)
-            {
-                Time.timeScale = 1;
-                EventManager.TriggerEvent("freezeEnd");
-                Instantiate(particlesDeath, transform.position, Quaternion.identity);
-                GetComponent<Renderer>().enabled = false;
-                trail.SetActive(false);
-                
-            }
-            if (timeDead >= respawnTime)
-                Respawn();
-        }
     }
 
     private void PlayerInput()
     {
+        // Fail-safe if the player falls out of bounds
+        if (Vector3.Magnitude(transform.position) > 40)
+            StartCoroutine(Die());
+
         if (IsGrounded())
         {
             // Reset vertical movement and jump count and allow gravity changing
@@ -91,19 +78,7 @@ public class Movement : MonoBehaviour {
         }
 
         if (Input.GetButtonDown("Blast"))
-        {
-            Blast();
-        }
-
-        if (blastTrigger.activeSelf)
-        {
-            timeBlast += Time.deltaTime;
-            if (timeBlast >= blastActiveTime)
-            {
-                timeBlast = 0;
-                blastTrigger.SetActive(false);
-            }
-        }
+            StartCoroutine(Blast());
 
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -127,20 +102,31 @@ public class Movement : MonoBehaviour {
         _controller.Move(movement * Time.deltaTime);
     }
 
-    private void Blast()
+    IEnumerator Blast()
     {
         blastTrigger.SetActive(true);
         ParticleSystem blast = Instantiate(particlesBlast, transform.position, Quaternion.identity);
         blast.transform.parent = transform;
+        yield return new WaitForSeconds(blastActiveTime);
+        blastTrigger.SetActive(false);
     }
 
-    private void Die()
+    IEnumerator Die()
     {
         Instantiate(particlesBuildUp, transform.position, Quaternion.identity);
         dead = true;
-        timeDead = 0;
         Time.timeScale = 0;
         EventManager.TriggerEvent("playerDeath");
+        yield return new WaitForSecondsRealtime(freezeTime);
+
+        Time.timeScale = 1;
+        EventManager.TriggerEvent("freezeEnd");
+        Instantiate(particlesDeath, transform.position, Quaternion.identity);
+        GetComponent<Renderer>().enabled = false;
+        trail.SetActive(false);
+        yield return new WaitForSeconds(respawnTime);
+
+        Respawn();
     }
 
     private void Respawn()
@@ -155,7 +141,6 @@ public class Movement : MonoBehaviour {
     private bool IsGrounded()
     {
         Vector3 dir = _gravity.direction;
-
         RaycastHit hit;
        
         if (Physics.Raycast(transform.position, dir, out hit, 0.7f))
@@ -172,11 +157,10 @@ public class Movement : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Danger")
-            Die();
+            StartCoroutine(Die());
         if (other.tag == "PickUp")
-        {
             other.GetComponent<GoalSphere>().ChargeStart();
-        }
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -198,6 +182,4 @@ public class Movement : MonoBehaviour {
         if (other.tag == "PickUp")
             other.GetComponent<GoalSphere>().ChargeStop();
     }
-    
-
 }

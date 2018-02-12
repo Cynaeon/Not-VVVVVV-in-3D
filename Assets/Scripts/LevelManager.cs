@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
@@ -9,44 +10,46 @@ public class LevelManager : MonoBehaviour {
     private float timeLoaded;
     private bool loading;
 
+    private UnityAction levelClear;
+
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
+        levelClear = new UnityAction(PrepareToLoad);
     }
 
     private void Update()
     {
         if (SceneManager.GetActiveScene().name == "menu")
         {
-            LoadNextLevel();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             return;
-        }
-
-        if (!FindObjectOfType<GoalSphere>())
-        {
-            loading = true;
-        }
-        else
-            loading = false;
-
-        if (loading)
-        {
-            timeLoaded += Time.deltaTime;
-            if (timeLoaded >= timeTillLoad)
-                LoadNextLevel();
-
-        }
+        } 
     }
 
-    public void PrepareToLoad()
+    void PrepareToLoad()
     {
-        loading = true;
+        StartCoroutine(LoadNextLevel());
     }
 
-    public void LoadNextLevel()
+    IEnumerator LoadNextLevel()
     {
-        timeLoaded = 0;
-        loading = false;
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    void OnEnable()
+    {
+        EventManager.StartListening("levelCleared", levelClear);
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        EventManager.StartListening("levelCleared", levelClear);
+    }
+
+    void OnDisable()
+    {
+        EventManager.StopListening("levelCleared", levelClear);
     }
 }
