@@ -39,7 +39,6 @@ public class Movement : MonoBehaviour {
     }
 
     void Update () {
-
         if (!dead)
             PlayerInput();
     }
@@ -90,21 +89,41 @@ public class Movement : MonoBehaviour {
         {
             case 0:
                 movement = new Vector3(horizontal, verticalMovement, vertical);
+                movement.x = SnapTo(movement.x);
+                movement.z = SnapTo(movement.z);
                 movement = Quaternion.Euler(0, 45, 0) * movement;
                 break;
             case 1:
                 movement = new Vector3(-verticalMovement, -vertical, horizontal);
+                movement.y = SnapTo(movement.y);
+                movement.z = SnapTo(movement.z);
                 movement = Quaternion.Euler(-45, 0, 0) * movement;
                 break;
             case 2:
                 movement = new Vector3(vertical, -horizontal, -verticalMovement);
+                movement.x = SnapTo(movement.x);
+                movement.y = SnapTo(movement.y);
                 movement = Quaternion.Euler(0, 0, -45) * movement;
                 break;
         }
         movement *= speed;
-        movement.y = Mathf.Round(movement.y / 45) * 45;
         _controller.Move(movement * Time.deltaTime);
     }
+
+    // This here grants 8-directional movement
+    float SnapTo(float value)
+    {
+        float abs = Mathf.Abs(value);
+        if (abs > 0.2f)
+            abs = .75f;
+        else
+            abs = 0;
+        if (value < 0)
+            abs = -abs;
+        return abs;
+    }
+
+
 
     IEnumerator Blast()
     {
@@ -146,8 +165,8 @@ public class Movement : MonoBehaviour {
     {
         Vector3 dir = _gravity.direction;
         RaycastHit hit;
-       
-        if (Physics.Raycast(transform.position, dir, out hit, 0.7f))
+        
+        if (Physics.SphereCast(transform.position, .35f, dir, out hit, 0.5f))
         {
             if (hit.transform.tag == "Ground" || hit.transform.tag == "PushPanel")
                 return true;

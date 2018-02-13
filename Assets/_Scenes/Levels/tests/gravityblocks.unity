@@ -559,32 +559,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 199135550557787644, guid: 3e9864d2257062a4291de43dabf01132,
-        type: 2}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198253202083811036, guid: 3e9864d2257062a4291de43dabf01132,
-        type: 2}
-      propertyPath: LightsModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 198253202083811036, guid: 3e9864d2257062a4291de43dabf01132,
         type: 2}
       propertyPath: LightsModule.light
       value: 
       objectReference: {fileID: 108530846293892262, guid: ffba08aa3e9d22d42b50d0bf4b098906,
         type: 2}
-    - target: {fileID: 198253202083811036, guid: 3e9864d2257062a4291de43dabf01132,
-        type: 2}
-      propertyPath: LightsModule.ratio
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199135550557787644, guid: 3e9864d2257062a4291de43dabf01132,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7996e931a4179a44db118d08fdafde5d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e9864d2257062a4291de43dabf01132, type: 2}
   m_IsPrefabParent: 0
