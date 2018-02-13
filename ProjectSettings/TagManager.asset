@@ -10,6 +10,7 @@ TagManager:
   - Danger
   - PushPanel
   - PickUp
+  - GravityBlock
   layers:
   - Default
   - TransparentFX

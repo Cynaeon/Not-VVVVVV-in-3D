@@ -18,6 +18,9 @@ public class Movement : MonoBehaviour {
     public ParticleSystem particlesBuildUp;
     public ParticleSystem particlesDeath;
 
+    // Temp variables (hopefully)
+    private bool onGravityBlock;
+
     private bool hasJumped;
     private bool dead;
     private int midairJumpCount;
@@ -47,7 +50,7 @@ public class Movement : MonoBehaviour {
         if (Vector3.Magnitude(transform.position) > 40)
             StartCoroutine(Die());
 
-        if (IsGrounded())
+        if (IsGrounded() || (!IsGrounded() && onGravityBlock))
         {
             // Reset vertical movement and jump count and allow gravity changing
             if (verticalMovement < 0)
@@ -99,6 +102,7 @@ public class Movement : MonoBehaviour {
                 break;
         }
         movement *= speed;
+        movement.y = Mathf.Round(movement.y / 45) * 45;
         _controller.Move(movement * Time.deltaTime);
     }
 
@@ -160,16 +164,15 @@ public class Movement : MonoBehaviour {
             StartCoroutine(Die());
         if (other.tag == "PickUp")
             other.GetComponent<GoalSphere>().ChargeStart();
-
+        if (other.tag == "GravityBlock" && IsGrounded())
+            onGravityBlock = true;
     }
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.tag == "Platform" && IsGrounded() || other.tag == "GravityBlock")
+            transform.parent = other.transform;
 
-        if (other.tag == "Platform" && IsGrounded())
-        {
-            transform.parent = other.transform.parent;
-        }
         else
             transform.parent = null;
     }
@@ -181,5 +184,10 @@ public class Movement : MonoBehaviour {
             transform.parent = null;
         if (other.tag == "PickUp")
             other.GetComponent<GoalSphere>().ChargeStop();
+        if (other.tag == "GravityBlock")
+        {
+            onGravityBlock = false;
+            transform.parent = null;
+        }
     }
 }
