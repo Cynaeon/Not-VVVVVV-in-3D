@@ -84,25 +84,26 @@ public class Movement : MonoBehaviour {
 
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+        Vector2 input = new Vector2(horizontal, vertical);
 
         switch (_gravity.dirNumber)
         {
             case 0:
                 movement = new Vector3(horizontal, verticalMovement, vertical);
-                movement.x = SnapTo(movement.x);
-                movement.z = SnapTo(movement.z);
+                movement.x = SnapTo(movement.x) * input.magnitude;
+                movement.z = SnapTo(movement.z) * input.magnitude;
                 movement = Quaternion.Euler(0, 45, 0) * movement;
                 break;
             case 1:
                 movement = new Vector3(-verticalMovement, -vertical, horizontal);
-                movement.y = SnapTo(movement.y);
-                movement.z = SnapTo(movement.z);
+                movement.y = SnapTo(movement.y) * input.magnitude;
+                movement.z = SnapTo(movement.z) * input.magnitude;
                 movement = Quaternion.Euler(-45, 0, 0) * movement;
                 break;
             case 2:
                 movement = new Vector3(vertical, -horizontal, -verticalMovement);
-                movement.x = SnapTo(movement.x);
-                movement.y = SnapTo(movement.y);
+                movement.x = SnapTo(movement.x) * input.magnitude;
+                movement.y = SnapTo(movement.y) * input.magnitude;
                 movement = Quaternion.Euler(0, 0, -45) * movement;
                 break;
         }
@@ -122,8 +123,6 @@ public class Movement : MonoBehaviour {
             abs = -abs;
         return abs;
     }
-
-
 
     IEnumerator Blast()
     {
@@ -166,7 +165,7 @@ public class Movement : MonoBehaviour {
         Vector3 dir = _gravity.direction;
         RaycastHit hit;
         
-        if (Physics.SphereCast(transform.position, .35f, dir, out hit, 0.5f))
+        if (Physics.SphereCast(transform.position, .35f, dir, out hit, 0.3f))
         {
             if (hit.transform.tag == "Ground" || hit.transform.tag == "PushPanel")
                 return true;
