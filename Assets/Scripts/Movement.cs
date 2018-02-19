@@ -178,7 +178,7 @@ public class Movement : MonoBehaviour {
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Danger")
+        if (other.tag == "Danger" && !dead)
             StartCoroutine(Die());
         if (other.tag == "PickUp")
             other.GetComponent<GoalSphere>().ChargeStart();
