@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour {
 
     private bool hasJumped;
     private bool dead;
+    private bool disableInput;
     private int midairJumpCount;
     private float respawnTime = 0.5f;
     private float freezeTime = 0.5f;
@@ -39,7 +40,7 @@ public class Movement : MonoBehaviour {
     }
 
     void Update () {
-        if (!dead)
+        if (!dead && !disableInput)
             PlayerInput();
     }
 
@@ -164,7 +165,7 @@ public class Movement : MonoBehaviour {
         _gravity.dirNumber = 0;
     }
 
-    private bool IsGrounded()
+    internal bool IsGrounded()
     {
         Vector3 dir = _gravity.direction;
         RaycastHit hit;
@@ -182,17 +183,33 @@ public class Movement : MonoBehaviour {
     
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "Finish" && IsGrounded())
+        {
+            disableInput = true;
+        }
+
         if (other.tag == "Danger" && !dead)
             StartCoroutine(Die());
         if (other.tag == "PickUp")
             other.GetComponent<GoalSphere>().ChargeStart();
+        if (other.tag == "GravityBlock" && IsGrounded())
+        {
+            transform.parent = other.transform.parent;
+            onGravityBlock = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
+
+        if (other.tag == "Finish" && IsGrounded())
+        {
+            disableInput = true;
+        }
+
         if (other.tag == "GravityBlock" && IsGrounded())
         {
-            transform.parent = other.transform;
+            transform.parent = other.transform.parent;
             onGravityBlock = true;
         }
 

@@ -14,6 +14,9 @@ public class Gravity : MonoBehaviour {
             direction = Vector3.right;
         else if (dirNumber == 2)
             direction = Vector3.forward;
+
+        Physics.gravity = direction;
+
 	}
 
     public void ChangeClockwise()

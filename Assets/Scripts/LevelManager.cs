@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour {
 
     IEnumerator LoadNextLevel()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
