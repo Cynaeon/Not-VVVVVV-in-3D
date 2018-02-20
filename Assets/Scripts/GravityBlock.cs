@@ -5,16 +5,12 @@ using UnityEngine;
 public class GravityBlock : MonoBehaviour {
 
     public float rotationSpeed;
-    public Transform player;
-
     private Gravity _gravity;
 
-	// Use this for initialization
 	void Start () {
         _gravity = GameObject.Find("Gravity").GetComponent<Gravity>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
         Vector3 target = Vector3.zero;
 
@@ -33,6 +29,5 @@ public class GravityBlock : MonoBehaviour {
         float step = rotationSpeed * Time.deltaTime;
         Vector3 newDir = Vector3.RotateTowards(transform.forward, target, step, 0.0F);
         transform.rotation = Quaternion.LookRotation(newDir);
-        print(target);
 	}
 }

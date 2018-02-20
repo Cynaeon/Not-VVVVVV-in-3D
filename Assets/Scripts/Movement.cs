@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour {
     public ParticleSystem particlesBuildUp;
     public ParticleSystem particlesDeath;
 
-    // Temp variables (hopefully)
+    // Temp variables (hopefully) (not really xd)
     private bool onGravityBlock;
 
     private bool hasJumped;
@@ -109,6 +109,10 @@ public class Movement : MonoBehaviour {
         }
         movement *= speed;
         _controller.Move(movement * Time.deltaTime);
+
+        // Face the movement direction
+        if (movement.magnitude > 0)
+            transform.rotation = Quaternion.LookRotation(movement);
     }
 
     // This here grants 8-directional movement
@@ -182,17 +186,19 @@ public class Movement : MonoBehaviour {
             StartCoroutine(Die());
         if (other.tag == "PickUp")
             other.GetComponent<GoalSphere>().ChargeStart();
-        if (other.tag == "GravityBlock" && IsGrounded())
-            onGravityBlock = true;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Platform" && IsGrounded() || other.tag == "GravityBlock")
+        if (other.tag == "GravityBlock" && IsGrounded())
+        {
+            transform.parent = other.transform;
+            onGravityBlock = true;
+        }
+
+        if (other.tag == "Platform" && IsGrounded())
             transform.parent = other.transform;
 
-        else
-            transform.parent = null;
     }
 
     

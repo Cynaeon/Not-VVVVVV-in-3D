@@ -5178,31 +5178,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 199135550557787644, guid: 3e9864d2257062a4291de43dabf01132,
-        type: 2}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198253202083811036, guid: 3e9864d2257062a4291de43dabf01132,
-        type: 2}
-      propertyPath: LightsModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 198253202083811036, guid: 3e9864d2257062a4291de43dabf01132,
         type: 2}
       propertyPath: LightsModule.light
       value: 
       objectReference: {fileID: 108530846293892262, guid: ffba08aa3e9d22d42b50d0bf4b098906,
         type: 2}
-    - target: {fileID: 198253202083811036, guid: 3e9864d2257062a4291de43dabf01132,
+    - target: {fileID: 108747744103553940, guid: 3e9864d2257062a4291de43dabf01132,
         type: 2}
-      propertyPath: LightsModule.ratio
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 143396650316372746, guid: 3e9864d2257062a4291de43dabf01132,
-        type: 2}
-      propertyPath: m_StepOffset
-      value: 0.5
+      propertyPath: m_Intensity
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e9864d2257062a4291de43dabf01132, type: 2}
