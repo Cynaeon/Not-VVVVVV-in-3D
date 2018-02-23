@@ -9,11 +9,9 @@ public class PushBlock : MonoBehaviour {
 
     private bool moving;
     private Vector3 moveTarget;
-    private Gravity _gravity;
 
 	void Start () {
         moveTarget = transform.position;
-        _gravity = FindObjectOfType<Gravity>();
 	}
 	
 	void Update () {
@@ -28,16 +26,17 @@ public class PushBlock : MonoBehaviour {
         RaycastHit hit;
 
         // Dismiss if going to move against the gravity (i.e. into the air)
-        if (Vector3.Dot(dir, _gravity.direction) == 1)
+        if (Vector3.Dot(dir, Gravity.direction) == 1)
             return;
 
         // Dismiss if going to go through a solid obstacle
         if (Physics.Raycast(transform.position, dir, out hit, 1.5f))
             return;
 
-        Vector3 dirAngledDown = (dir + (_gravity.direction / 1.3f)) * 2;
-        Debug.DrawRay(transform.position, dirAngledDown, Color.red, 1.5f);
+        Vector3 dirAngledDown = (dir + (Gravity.direction / 1.3f)) * 2;
+        //Debug.DrawRay(transform.position, dirAngledDown, Color.red, 1.5f);
 
+        // Check if the spot we are going to is Push Panel
         if (Physics.Raycast(transform.position, dirAngledDown, out hit, 2f))
         {
             if (hit.transform.tag == "PushPanel")

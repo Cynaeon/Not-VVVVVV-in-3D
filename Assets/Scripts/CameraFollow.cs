@@ -8,27 +8,29 @@ public class CameraFollow : MonoBehaviour {
     public float zoomSpeed;
     public float lookAroundDistance = 20;
     public float multiplier = 1;
+    public float zoomLevel0 = 5;
+    public float zoomLevel1 = 8;
+    public float zoomLevel2 = 14;
+    public float offset = 4;
 
     private Transform target;
-    private Gravity _gravity;
     private float camSize;
-    private Vector3 offset;
+    private Vector3 offsetVector;
     private Vector3 rotation;
     private int zoomLevel = 1;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        _gravity = GameObject.Find("Gravity").GetComponent<Gravity>();
-        offset = new Vector3(-20, 9, -20);
-        camSize = Camera.main.orthographicSize;
+        camSize = Camera.main.orthographicSize * 5;
+        Camera.main.orthographicSize = camSize;
     }
 
     void Update()
     {
         if (target)
         {
-            transform.position = Vector3.Lerp(transform.position, target.position + -transform.forward * 30, 0.1f);
+            transform.position = Vector3.Lerp(transform.position, (target.position + -transform.forward * 30) + offsetVector, 0.1f);
         }
 
         float horizontal = Input.GetAxisRaw("Right_Horizontal");
@@ -42,20 +44,20 @@ public class CameraFollow : MonoBehaviour {
 
         Vector3 look = Vector3.zero;
 
-        if (_gravity.dirNumber == 0)
+        if (Gravity.dirNumber == 0)
         {
             rotation = new Vector3(45, 45, 0);
-            offset = new Vector3(-20, 9, -20);
+            offsetVector = new Vector3(0, offset, 0);
         }
-        else if (_gravity.dirNumber == 1)
+        else if (Gravity.dirNumber == 1)
         {
             rotation = new Vector3(30, 55, 125);
-            offset = new Vector3(-9, 20, -20);
+            offsetVector = new Vector3(-offset, 0, 0);
         }
-        else if (_gravity.dirNumber == 2)
+        else if (Gravity.dirNumber == 2)
         {
             rotation = new Vector3(30, 35, 235);
-            offset = new Vector3(-20, 20, -9);
+            offsetVector = new Vector3(0, 0, -offset);
         }
 
         rotation += new Vector3(-vertical * lookAroundDistance, -horizontal * lookAroundDistance, 0);
@@ -70,13 +72,13 @@ public class CameraFollow : MonoBehaviour {
         switch (zoomLevel)
         {
             case 0:
-                camSize = 5;
+                camSize = zoomLevel0;
                 break;
             case 1:
-                camSize = 7;
+                camSize = zoomLevel1;
                 break;
             case 2:
-                camSize = 14;
+                camSize = zoomLevel2;
                 break;
         }
 

@@ -15,26 +15,19 @@ public class LevelManager : MonoBehaviour {
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
-        levelClear = new UnityAction(PrepareToLoad);
     }
 
     private void Update()
     {
         if (SceneManager.GetActiveScene().name == "menu")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            LoadNextLevel();
             return;
         } 
     }
 
-    void PrepareToLoad()
+    public static void LoadNextLevel()
     {
-        StartCoroutine(LoadNextLevel());
-    }
-
-    IEnumerator LoadNextLevel()
-    {
-        yield return new WaitForSeconds(0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

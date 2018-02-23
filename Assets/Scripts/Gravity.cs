@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Gravity : MonoBehaviour {
 
-    public int dirNumber;
-    public Vector3 direction;
+    public static int dirNumber;
+    public static Vector3 direction;
 
 	void Update () {
         if (dirNumber == 0)
@@ -19,14 +19,14 @@ public class Gravity : MonoBehaviour {
 
 	}
 
-    public void ChangeClockwise()
+    public static void ChangeClockwise()
     {
         dirNumber++;
         if (dirNumber > 2)
             dirNumber = 0;
     }
 
-    public void ChangeCounterclockwise()
+    public static void ChangeCounterclockwise()
     {
         dirNumber--;
         if (dirNumber < 0)

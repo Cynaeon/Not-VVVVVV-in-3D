@@ -5,16 +5,13 @@ using UnityEngine;
 public class GravityBlock : MonoBehaviour {
 
     public float rotationSpeed;
-    private Gravity _gravity;
 
-	void Start () {
-        _gravity = GameObject.Find("Gravity").GetComponent<Gravity>();
-	}
+	void Start () { }
 	
 	void Update () {
         Vector3 target = Vector3.zero;
 
-        switch (_gravity.dirNumber)
+        switch (Gravity.dirNumber)
         {
             case 0:
                 target = new Vector3(0, -1, 0);

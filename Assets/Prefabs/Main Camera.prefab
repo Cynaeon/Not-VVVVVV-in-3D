@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  zoomSpeed: 5
+  zoomSpeed: 2
   lookAroundDistance: 20
   multiplier: 1
 --- !u!114 &114357178839573732

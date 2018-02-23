@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4872100875765216}
   - component: {fileID: 198116957139807552}
   - component: {fileID: 199695826304570548}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,10 +38,10 @@ GameObject:
   - component: {fileID: 4898693965482224}
   - component: {fileID: 65323490395614970}
   - component: {fileID: 114479271457489636}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Goal
   m_TagString: Finish
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4766862217210876}
   - component: {fileID: 198178707512166620}
   - component: {fileID: 199568495318780122}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab91c2978ea80db45bf73adc6a0b80fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p_goal: {fileID: 198236265787261936, guid: 549a1bb3e17eb88449a6cd35fdbb4e14, type: 2}
+  p_goal: {fileID: 198823996134700308, guid: 4afedcef9e42c9c4d92b82fb2a9086ff, type: 2}
+  goalEffects: {fileID: 4603253009584682, guid: 50fad14788337c44a82c43a10adc3008,
+    type: 2}
+  effectsAscendSpeed: 5
+  timeUntilLevelChange: 2
 --- !u!198 &198116957139807552
 ParticleSystem:
   m_ObjectHideFlags: 1

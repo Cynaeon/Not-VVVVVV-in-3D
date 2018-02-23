@@ -17,6 +17,8 @@ public class Movement : MonoBehaviour {
     public ParticleSystem particlesJump;
     public ParticleSystem particlesBuildUp;
     public ParticleSystem particlesDeath;
+    public ParticleSystem particlesWarp;
+    public ParticleSystem particlesSpawn;
 
     // Temp variables (hopefully) (not really xd)
     private bool onGravityBlock;
@@ -27,16 +29,20 @@ public class Movement : MonoBehaviour {
     private int midairJumpCount;
     private float respawnTime = 0.5f;
     private float freezeTime = 0.5f;
-    private Gravity _gravity;
     private CharacterController _controller;
+    private Renderer _rend;
     private Vector3 movement;
     private float verticalMovement;
+    private ParticleSystem p_instance;
 
     void Start()
     {
-        _gravity = GameObject.Find("Gravity").GetComponent<Gravity>();
         _controller = GetComponent<CharacterController>();
+        _rend = GetComponent<Renderer>();
+        _rend.enabled = false;
+        disableInput = true;
         blastTrigger.SetActive(false);
+        StartCoroutine(Respawn());
     }
 
     void Update () {
@@ -58,9 +64,9 @@ public class Movement : MonoBehaviour {
             midairJumpCount = 0;
 
             if (Input.GetButtonDown("GravityRight"))
-                _gravity.ChangeClockwise();
+                Gravity.ChangeClockwise();
             else if (Input.GetButtonDown("GravityLeft"))
-                _gravity.ChangeCounterclockwise();
+                Gravity.ChangeCounterclockwise();
         }
         else
         {
@@ -87,7 +93,7 @@ public class Movement : MonoBehaviour {
         float vertical = Input.GetAxis("Vertical");
         Vector2 input = new Vector2(horizontal, vertical);
 
-        switch (_gravity.dirNumber)
+        switch (Gravity.dirNumber)
         {
             case 0:
                 movement = new Vector3(horizontal, verticalMovement, vertical);
@@ -153,9 +159,31 @@ public class Movement : MonoBehaviour {
         trail.SetActive(false);
         yield return new WaitForSeconds(respawnTime);
 
-        Respawn();
+        StartCoroutine(Respawn());
     }
 
+    IEnumerator Respawn()
+    {
+        Vector3 startPos;
+        if (GameObject.FindGameObjectWithTag("Respawn")) 
+            startPos = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+        else
+            startPos = new Vector3(-10, 1, -10);
+        transform.position = startPos;
+        Gravity.dirNumber = 0;
+        startPos.y = 15;
+        p_instance = Instantiate(particlesWarp, startPos, Quaternion.identity);
+        yield return new WaitForSeconds(p_instance.main.duration - .1f);
+
+        p_instance = null;
+        _rend.enabled = true;
+        Instantiate(particlesSpawn, transform.position, Quaternion.identity);
+        trail.SetActive(true);
+        dead = false;
+        disableInput = false;
+    }
+
+    /*
     private void Respawn()
     {
         dead = false;
@@ -164,18 +192,23 @@ public class Movement : MonoBehaviour {
         transform.position = new Vector3(-10, 1, -10);
         _gravity.dirNumber = 0;
     }
+    */
 
     internal bool IsGrounded()
     {
-        Vector3 dir = _gravity.direction;
+        Vector3 dir = Gravity.direction;
         RaycastHit hit;
         
         if (Physics.SphereCast(transform.position, .35f, dir, out hit, 0.3f))
         {
-            if (hit.transform.tag == "Ground" || hit.transform.tag == "PushPanel")
+
+            return true;
+            /*
+            if (hit.transform.tag == "Ground" || hit.transform.tag == "PushPanel" || hit.transform.tag == "Respawn")
                 return true;
             else
                 return false;
+                */
         }
         else
             return false;

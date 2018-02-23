@@ -178,7 +178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1836967572626666
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,13 +289,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1591040688959000}
-  m_LocalRotation: {x: 0.12981112, y: 0.1036342, z: -0.013643698, w: 0.98601365}
+  m_LocalRotation: {x: 0.122654475, y: 0.33909407, z: -0.044642568, w: 0.9316535}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4603538606266964}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 15, y: 12, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 40, z: 0}
 --- !u!4 &4473295770304830
 Transform:
   m_ObjectHideFlags: 1
@@ -791,7 +791,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.11
+  m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -799,8 +799,8 @@ Light:
     m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.885
-    m_Bias: 1.2
+    m_Strength: 0.629
+    m_Bias: 0.5
     m_NormalBias: 0
     m_NearPlane: 0.1
   m_Cookie: {fileID: 0}
@@ -827,7 +827,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.04
+  m_Intensity: 1.3
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -835,8 +835,8 @@ Light:
     m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.885
-    m_Bias: 1.2
+    m_Strength: 0.629
+    m_Bias: 0.5
     m_NormalBias: 0
     m_NearPlane: 0.1
   m_Cookie: {fileID: 0}
@@ -863,7 +863,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 1.4
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -871,8 +871,8 @@ Light:
     m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.885
-    m_Bias: 1.2
+    m_Strength: 0.629
+    m_Bias: 0.5
     m_NormalBias: 0
     m_NearPlane: 0.1
   m_Cookie: {fileID: 0}
@@ -900,8 +900,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62916ab86d300943b258477602531a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dirNumber: 0
-  direction: {x: 0, y: 0, z: 0}
 --- !u!198 &198943647912958644
 ParticleSystem:
   m_ObjectHideFlags: 1
