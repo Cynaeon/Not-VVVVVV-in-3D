@@ -92,6 +92,8 @@ public class Movement : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector2 input = new Vector2(horizontal, vertical);
+        if (input.magnitude > 1)
+            input.Normalize();
 
         switch (Gravity.dirNumber)
         {
