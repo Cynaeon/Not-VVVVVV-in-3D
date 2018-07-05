@@ -6,31 +6,35 @@ using UnityEngine.EventSystems;
 
 public class PauseSystem : MonoBehaviour {
 
+    public static PauseSystem instance = null;
     public GameObject pausePanel;
     public GameObject selectedButton;
     public static bool paused;
 
-	void Start () {
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+
         DontDestroyOnLoad(gameObject);
-	}
-	
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0)
+    }
+
+    void Update () {
+		if (Input.GetKeyDown(KeyCode.P) && SceneManager.GetActiveScene().buildIndex != 0)
         {
             TogglePause();
         }
 	}
 
-    void SetSelected()
-    {
-        EventSystem.current.SetSelectedGameObject(selectedButton);
-    }
+    void SetSelected() { EventSystem.current.SetSelectedGameObject(selectedButton); }
 
     public void TogglePause()
     {
         if (!paused)
         {
-            Invoke("SetSelected", 0.1f);
+            //Invoke("SetSelected", 0.1f);
             paused = true;
             Time.timeScale = 0;
             pausePanel.SetActive(true);

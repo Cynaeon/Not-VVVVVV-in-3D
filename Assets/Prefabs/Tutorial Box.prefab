@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitUntilShow: 2
-  showDuration: 10
+  showDuration: 99
   speed: 500
 --- !u!222 &222267326957179970
 CanvasRenderer:
