@@ -46,7 +46,7 @@ public class Movement : MonoBehaviour {
     }
 
     void Update () {
-        if (!dead && !disableInput)
+        if (!dead && !disableInput && !PauseSystem.paused)
             PlayerInput();
     }
 
