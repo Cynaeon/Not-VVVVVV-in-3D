@@ -22,6 +22,8 @@ public class HighlightButton : MonoBehaviour {
     void Update () {
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
             EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
+        if (EventSystem.current.currentSelectedGameObject == null && Input.GetAxis("Vertical") != 0)
+            EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
     }
 
     IEnumerator SelectButton()

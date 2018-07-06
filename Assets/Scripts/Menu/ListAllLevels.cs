@@ -18,10 +18,11 @@ public class ListAllLevels : MonoBehaviour {
             GameObject newButton = Instantiate(button);
             newButton.transform.SetParent(levelSelectPanel, false);
             newButton.name = "Level" + i + "Button";
+            newButton.GetComponent<Button>().interactable = (GameManager.instance.currentLevel >= i);
             newButton.GetComponentInChildren<Text>().text = i.ToString();
             newButton.GetComponent<LoadOnClick>().levelIndex = i;
             if (i == 1)
-                GameObject.Find("EventSystem").GetComponent<EventSystem>().firstSelectedGameObject = newButton;
+                EventSystem.current.firstSelectedGameObject = newButton;
         }
     }
 }

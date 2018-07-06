@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoalPad : MonoBehaviour {
 
@@ -66,7 +67,9 @@ public class GoalPad : MonoBehaviour {
                 if (!p_instance)
                 {
                     pos = other.transform.position;
-                    
+                    if (GameManager.instance.currentLevel <= SceneManager.GetActiveScene().buildIndex)
+                        GameManager.instance.currentLevel = 1 + SceneManager.GetActiveScene().buildIndex;
+
                     StartCoroutine(TriggerEffects());
                 }
             }
