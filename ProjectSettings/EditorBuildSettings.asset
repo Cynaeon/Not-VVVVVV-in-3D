@@ -24,6 +24,15 @@ EditorBuildSettings:
     path: Assets/_Scenes/Levels/tuto_gravity 2.unity
     guid: 16652e135f4f8674f8c1b231e8503f53
   - enabled: 1
+    path: Assets/_Scenes/Levels/tuto_diagonalblocks.unity
+    guid: 0ca29f3646e3b3a4dacafad3d7400634
+  - enabled: 1
+    path: Assets/_Scenes/Levels/tuto_gravity 3.unity
+    guid: cc1674adff11f7b4a9c17d6b4e105a54
+  - enabled: 1
+    path: Assets/_Scenes/Levels/shadow_drop.unity
+    guid: 59ba424bf77c8ad4b985c00770433ed5
+  - enabled: 1
     path: Assets/_Scenes/Levels/jumping.unity
     guid: af33897ce7fbd9347889eca24fba2fbf
   - enabled: 1
@@ -45,11 +54,17 @@ EditorBuildSettings:
     path: Assets/_Scenes/Levels/pushingblocks.unity
     guid: 5e328420314b78a4a84fa7e3cafdf2b5
   - enabled: 1
+    path: Assets/_Scenes/Levels/triple_pushtowers.unity
+    guid: c03961123c5b33d4c83573ee6141332d
+  - enabled: 1
     path: Assets/_Scenes/Levels/gravityblock.unity
     guid: 8d86c840ac1be174cae47f5dac7cbfbc
   - enabled: 1
     path: Assets/_Scenes/Levels/gravityblock 2.unity
     guid: 4ca93109444e1d14980e0cec53f4bad3
+  - enabled: 1
+    path: Assets/_Scenes/Levels/gravityblock 3.unity
+    guid: 034a4d29ca079514bac57120bb4939d1
   - enabled: 1
     path: Assets/_Scenes/end.unity
     guid: 17f36a7ead5886a49a73e0fb6e4ea310

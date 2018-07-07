@@ -49,14 +49,6 @@ public class GoalPad : MonoBehaviour {
 
         LevelManager.LoadNextLevel();
     }
-    
-    /*
-    void TriggerEffects()
-    { 
-        instance = Instantiate(p_goal, pos, transform.parent.rotation);
-        activated = true;
-    }
-    */
 
     private void OnTriggerStay(Collider other)
     {
@@ -67,7 +59,7 @@ public class GoalPad : MonoBehaviour {
                 if (!p_instance)
                 {
                     pos = other.transform.position;
-                    if (GameManager.instance.currentLevel <= SceneManager.GetActiveScene().buildIndex)
+                    if (GameManager.instance && GameManager.instance.currentLevel <= SceneManager.GetActiveScene().buildIndex)
                         GameManager.instance.currentLevel = 1 + SceneManager.GetActiveScene().buildIndex;
 
                     StartCoroutine(TriggerEffects());

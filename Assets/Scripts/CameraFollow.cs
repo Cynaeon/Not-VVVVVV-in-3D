@@ -5,19 +5,27 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour {
 
     public float rotationSpeed;
+    public bool cameraSway;
+    public float swayLength;
+    public float swaySpeed;
     public float zoomSpeed;
     public float lookAroundDistance = 20;
     public float multiplier = 1;
-    public float zoomLevel0 = 5;
-    public float zoomLevel1 = 8;
-    public float zoomLevel2 = 14;
+    public float zoomLevel0 = 8;
+    public float zoomLevel1 = 14;
+    public float zoomLevel2 = 20;
     public float offset = 4;
 
     private Transform target;
     private float camSize;
     private Vector3 offsetVector;
     private Vector3 rotation;
-    private int zoomLevel = 1;
+    private int zoomLevel = 0;
+    private float horizontal;
+    private float vertical;
+    private float swayTime;
+    private bool swayDir;
+
 
     private void Start()
     {
@@ -33,8 +41,8 @@ public class CameraFollow : MonoBehaviour {
             transform.position = Vector3.Lerp(transform.position, (target.position + -transform.forward * 30) + offsetVector, 0.1f);
         }
 
-        float horizontal = Input.GetAxisRaw("Right_Horizontal");
-        float vertical = Input.GetAxisRaw("Right_Vertical");
+        horizontal = Input.GetAxisRaw("Right_Horizontal");
+        vertical = Input.GetAxisRaw("Right_Vertical");
 
         if (Mathf.Abs(horizontal) + Mathf.Abs(vertical) < 0.4f)
         {
@@ -59,6 +67,9 @@ public class CameraFollow : MonoBehaviour {
             rotation = new Vector3(30, 35, 235);
             offsetVector = new Vector3(0, 0, -offset);
         }
+
+        if (cameraSway) 
+            CameraSway();
 
         rotation += new Vector3(-vertical * lookAroundDistance, -horizontal * lookAroundDistance, 0);
 
@@ -93,6 +104,26 @@ public class CameraFollow : MonoBehaviour {
         {
             transform.eulerAngles = rotation;
         }
+    }
+
+    void CameraSway()
+    {
+        if (swayDir)
+        {
+            if (swayTime > 1)
+                swayDir = false;
+            else
+                swayTime += Time.deltaTime * swaySpeed;
+        }
+        else
+        {
+            if (swayTime < 0)
+                swayDir = true;
+            else
+                swayTime -= Time.deltaTime * swaySpeed;
+        }
+
+        horizontal = Mathf.SmoothStep(-swayLength, swayLength, swayTime);
     }
 
     Vector3 AngleLerp(Vector3 StartAngle, Vector3 FinishAngle, float t)
