@@ -203,14 +203,7 @@ public class Movement : MonoBehaviour {
         
         if (Physics.SphereCast(transform.position, .35f, dir, out hit, 0.3f))
         {
-
             return true;
-            /*
-            if (hit.transform.tag == "Ground" || hit.transform.tag == "PushPanel" || hit.transform.tag == "Respawn")
-                return true;
-            else
-                return false;
-                */
         }
         else
             return false;

@@ -27,7 +27,7 @@ public class CameraFollow : MonoBehaviour {
     private bool swayDir;
 
 
-    private void Start()
+    void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         camSize = Camera.main.orthographicSize * 5;
