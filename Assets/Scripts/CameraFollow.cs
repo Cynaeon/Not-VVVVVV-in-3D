@@ -29,6 +29,8 @@ public class CameraFollow : MonoBehaviour {
 
     void Start()
     {
+        if (GameObject.Find("X Wall").transform.localScale.x > 15)
+            zoomLevel = 1;
         target = GameObject.FindGameObjectWithTag("Player").transform;
         camSize = Camera.main.orthographicSize * 5;
         Camera.main.orthographicSize = camSize;
