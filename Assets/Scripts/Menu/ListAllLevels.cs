@@ -13,7 +13,7 @@ public class ListAllLevels : MonoBehaviour {
 	void Start () {
         int sceneCount = SceneManager.sceneCountInBuildSettings;
 
-        for (int i = 2; i < sceneCount; i++)
+        for (int i = 2; i < sceneCount - 1; i++)
         {
             GameObject newButton = Instantiate(button);
             newButton.transform.SetParent(levelSelectPanel, false);

@@ -110,7 +110,7 @@ MonoBehaviour:
   lookAroundDistance: 20
   multiplier: 1
   zoomLevel0: 8
-  zoomLevel1: 14
+  zoomLevel1: 13
   zoomLevel2: 20
   offset: 1
 --- !u!114 &114357178839573732

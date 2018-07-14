@@ -203,6 +203,8 @@ public class Movement : MonoBehaviour {
         
         if (Physics.SphereCast(transform.position, .35f, dir, out hit, 0.3f))
         {
+            if (hit.collider.gameObject.transform.tag == "Danger" || hit.collider.gameObject.transform.tag == "DangerBlock")
+                StartCoroutine(Die());
             return true;
         }
         else
@@ -216,7 +218,7 @@ public class Movement : MonoBehaviour {
             disableInput = true;
         }
 
-        if (other.tag == "Danger" && !dead)
+        if ((other.tag == "Danger" || other.tag == "DangerBlock") && !dead)
             StartCoroutine(Die());
         if (other.tag == "PickUp")
             other.GetComponent<GoalSphere>().ChargeStart();

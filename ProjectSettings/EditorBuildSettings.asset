@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/menu.unity
+    path: Assets/_Scenes/_menu.unity
     guid: 128935a9b490c6c4c8b8a55583900aef
   - enabled: 1
     path: Assets/_Scenes/Levels/tuto_moving.unity
@@ -51,11 +51,20 @@ EditorBuildSettings:
     path: Assets/_Scenes/Levels/dangerzone.unity
     guid: c864c5da909203e419f25f8df66c32b0
   - enabled: 1
+    path: Assets/_Scenes/Levels/pillars.unity
+    guid: d1c96a82cf3a95942bda6469f287393d
+  - enabled: 1
     path: Assets/_Scenes/Levels/pushingblocks.unity
     guid: 5e328420314b78a4a84fa7e3cafdf2b5
   - enabled: 1
     path: Assets/_Scenes/Levels/triple_pushtowers.unity
     guid: c03961123c5b33d4c83573ee6141332d
+  - enabled: 1
+    path: Assets/_Scenes/Levels/pushtower_with_goal.unity
+    guid: d3503f2ccfb305d4cac4ca109c71d6ae
+  - enabled: 1
+    path: Assets/_Scenes/Levels/make_stairs.unity
+    guid: 23b8656da45187748bff5ed6cdff834b
   - enabled: 1
     path: Assets/_Scenes/Levels/gravityblock.unity
     guid: 8d86c840ac1be174cae47f5dac7cbfbc
