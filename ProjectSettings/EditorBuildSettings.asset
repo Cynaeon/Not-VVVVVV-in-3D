@@ -28,15 +28,15 @@ EditorBuildSettings:
     guid: 0ca29f3646e3b3a4dacafad3d7400634
   - enabled: 1
     path: Assets/_Scenes/Levels/tuto_gravity 3.unity
-    guid: cc1674adff11f7b4a9c17d6b4e105a54
+    guid: 480bbc78b1c58e54bb653a41f2a29c48
   - enabled: 1
-    path: Assets/_Scenes/Levels/shadow_drop.unity
+    path: Assets/_Scenes/Levels/drop_by_shadows.unity
     guid: 59ba424bf77c8ad4b985c00770433ed5
   - enabled: 1
     path: Assets/_Scenes/Levels/jumping.unity
     guid: af33897ce7fbd9347889eca24fba2fbf
   - enabled: 1
-    path: Assets/_Scenes/Levels/air cubes.unity
+    path: Assets/_Scenes/Levels/airway.unity
     guid: dfc1b07a504417d439f614384370ac04
   - enabled: 1
     path: Assets/_Scenes/Levels/tower.unity

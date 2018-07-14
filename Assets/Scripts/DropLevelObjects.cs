@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DropLevelObjects : MonoBehaviour {
 
-    public float fallSpeed;
-    public float dropInterval;
-    public int dropDistance;
+    public float fallSpeed = 80;
+    public float dropInterval = 0.05f;
+    public int dropDistance = 40;
 
     private List<Transform> levelObjects = new List<Transform>();
 
@@ -15,9 +15,12 @@ public class DropLevelObjects : MonoBehaviour {
 		
         for (int i = 0; i < transform.childCount; i++)
         {
+            if (transform.GetChild(i).tag == "Danger" || transform.GetChild(i).tag == "PushPanel")
+                continue;
             levelObjects.Add(transform.GetChild(i));
             transform.GetChild(i).position += Vector3.up * dropDistance;
         }
+        dropInterval = 1 / (float) transform.childCount;
         StartCoroutine(StartDropping());
         
 	}

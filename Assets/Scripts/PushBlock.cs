@@ -10,7 +10,7 @@ public class PushBlock : MonoBehaviour {
     private bool moving;
     private Vector3 moveTarget;
 
-	void Start () {
+	void Awake () {
         moveTarget = transform.position;
 	}
 	
