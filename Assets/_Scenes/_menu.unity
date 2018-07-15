@@ -1350,6 +1350,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 30
+  menuNavigate: {fileID: 8300000, guid: 9acbf999a81134348bf44105ba5794f8, type: 3}
+  menuPress: {fileID: 0}
 --- !u!1001 &380398998
 Prefab:
   m_ObjectHideFlags: 0
@@ -2013,6 +2015,7 @@ Transform:
   m_Children:
   - {fileID: 1167834914}
   - {fileID: 1357051067}
+  - {fileID: 1128191589}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2052,6 +2055,7 @@ GameObject:
   - component: {fileID: 785991838}
   - component: {fileID: 785991841}
   - component: {fileID: 785991842}
+  - component: {fileID: 785991843}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -2075,8 +2079,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 192, y: -225.13968}
-  m_SizeDelta: {x: 384, y: 90.05587}
+  m_AnchoredPosition: {x: 192, y: -225.09703}
+  m_SizeDelta: {x: 384, y: 90.03881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &785991838
 MonoBehaviour:
@@ -2119,6 +2123,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 785991842}
         m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 785991841}
+        m_MethodName: MenuPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2177,6 +2192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 10
+  menuNavigate: {fileID: 8300000, guid: 9acbf999a81134348bf44105ba5794f8, type: 3}
+  menuPress: {fileID: 8300000, guid: 5db7dc18457eca6419fc5b9a17a306ee, type: 3}
 --- !u!114 &785991842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2188,6 +2205,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fe59b21172c01488bcbe1c7e8b6d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &785991843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 785991836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 785991841}
+          m_MethodName: MenuNavigate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1001 &855057408
 Prefab:
   m_ObjectHideFlags: 0
@@ -2482,6 +2529,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 30
+  menuNavigate: {fileID: 0}
+  menuPress: {fileID: 0}
 --- !u!1 &983581113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,6 +2941,130 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1128191587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128191589}
+  - component: {fileID: 1128191588}
+  m_Layer: 0
+  m_Name: Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1128191588
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1128191587}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1128191589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1128191587}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 718697776}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1167834913
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,6 +3227,7 @@ GameObject:
   - component: {fileID: 1275907707}
   - component: {fileID: 1275907706}
   - component: {fileID: 1275907704}
+  - component: {fileID: 1275907705}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -3094,6 +3268,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 30
+  menuNavigate: {fileID: 8300000, guid: 9acbf999a81134348bf44105ba5794f8, type: 3}
+  menuPress: {fileID: 8300000, guid: 5db7dc18457eca6419fc5b9a17a306ee, type: 3}
+--- !u!114 &1275907705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1275907702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1275907704}
+          m_MethodName: MenuNavigate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &1275907706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3148,6 +3354,17 @@ MonoBehaviour:
       - m_Target: {fileID: 74746262}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1275907704}
+        m_MethodName: MenuPress
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3245,6 +3462,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 10
+  menuNavigate: {fileID: 8300000, guid: 9acbf999a81134348bf44105ba5794f8, type: 3}
+  menuPress: {fileID: 8300000, guid: 5db7dc18457eca6419fc5b9a17a306ee, type: 3}
 --- !u!114 &1311001377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3298,6 +3517,17 @@ MonoBehaviour:
       - m_Target: {fileID: 74746262}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1311001376}
+        m_MethodName: MenuPress
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4375,6 +4605,7 @@ GameObject:
   - component: {fileID: 1653490224}
   - component: {fileID: 1653490223}
   - component: {fileID: 1653490227}
+  - component: {fileID: 1653490228}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -4414,6 +4645,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 10
+  menuNavigate: {fileID: 8300000, guid: 9acbf999a81134348bf44105ba5794f8, type: 3}
+  menuPress: {fileID: 8300000, guid: 5db7dc18457eca6419fc5b9a17a306ee, type: 3}
 --- !u!114 &1653490224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4475,6 +4708,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1653490223}
+        m_MethodName: MenuPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1653490225
@@ -4523,6 +4767,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelIndex: 0
+--- !u!114 &1653490228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1653490221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653490223}
+          m_MethodName: MenuNavigate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1001 &1658987664
 Prefab:
   m_ObjectHideFlags: 0
@@ -4679,6 +4953,10 @@ PlayableDirector:
     value: {fileID: 8273907}
   - key: {fileID: 114763793172266506, guid: 87d76f75343677046a50ff810c596687, type: 2}
     value: {fileID: 74746262}
+  - key: {fileID: 114237290707690486, guid: 87d76f75343677046a50ff810c596687, type: 2}
+    value: {fileID: 1810379472}
+  - key: {fileID: 114641822337432148, guid: 87d76f75343677046a50ff810c596687, type: 2}
+    value: {fileID: 1810379472}
   m_ExposedReferences:
     m_References:
     - d40318ca3a9ffec4abb0675a47ce0ddb: {fileID: 1414194160}
@@ -4691,7 +4969,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1810379473}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4707,6 +4986,7 @@ GameObject:
   - component: {fileID: 1694763519}
   - component: {fileID: 1694763518}
   - component: {fileID: 1694763521}
+  - component: {fileID: 1694763522}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -4730,8 +5010,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 192, y: -45.027935}
-  m_SizeDelta: {x: 384, y: 90.05587}
+  m_AnchoredPosition: {x: 192, y: -45.019405}
+  m_SizeDelta: {x: 384, y: 90.03881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1694763518
 MonoBehaviour:
@@ -4772,6 +5052,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 876338023}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 74746262}
         m_MethodName: SetActive
         m_Mode: 6
@@ -4783,16 +5074,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 876338023}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1694763521}
+        m_MethodName: MenuPress
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -4843,6 +5134,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 10
+  menuNavigate: {fileID: 8300000, guid: 9acbf999a81134348bf44105ba5794f8, type: 3}
+  menuPress: {fileID: 8300000, guid: 5db7dc18457eca6419fc5b9a17a306ee, type: 3}
+--- !u!114 &1694763522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1694763516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1694763521}
+          m_MethodName: MenuNavigate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1742267718 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1053081388226970, guid: dea9701fe1b95db44acfe6a175852f23,
@@ -4993,6 +5316,130 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dea9701fe1b95db44acfe6a175852f23, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1810379471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1810379473}
+  - component: {fileID: 1810379472}
+  m_Layer: 0
+  m_Name: Timeline Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1810379472
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1810379471}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1810379473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1810379471}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.664422, y: 15.54198, z: -24.507116}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1665267155}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1814242220 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1053081388226970, guid: dea9701fe1b95db44acfe6a175852f23,
@@ -5112,6 +5559,7 @@ GameObject:
   - component: {fileID: 1870508547}
   - component: {fileID: 1870508546}
   - component: {fileID: 1870508545}
+  - component: {fileID: 1870508549}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -5151,6 +5599,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 10
+  menuNavigate: {fileID: 8300000, guid: 9acbf999a81134348bf44105ba5794f8, type: 3}
+  menuPress: {fileID: 8300000, guid: 5db7dc18457eca6419fc5b9a17a306ee, type: 3}
 --- !u!114 &1870508546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5201,6 +5651,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1870508545}
+        m_MethodName: MenuPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1870508547
@@ -5237,6 +5698,36 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1870508543}
   m_CullTransparentMesh: 0
+--- !u!114 &1870508549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870508543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1870508545}
+          m_MethodName: MenuNavigate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &2016598405
 GameObject:
   m_ObjectHideFlags: 0
@@ -5398,6 +5889,7 @@ GameObject:
   - component: {fileID: 2037997367}
   - component: {fileID: 2037997366}
   - component: {fileID: 2037997370}
+  - component: {fileID: 2037997371}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -5437,6 +5929,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 10
+  menuNavigate: {fileID: 8300000, guid: 9acbf999a81134348bf44105ba5794f8, type: 3}
+  menuPress: {fileID: 8300000, guid: 5db7dc18457eca6419fc5b9a17a306ee, type: 3}
 --- !u!114 &2037997367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5478,6 +5972,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2037997370}
         m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2037997366}
+        m_MethodName: MenuPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5534,6 +6039,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fe59b21172c01488bcbe1c7e8b6d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2037997371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2037997364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2037997366}
+          m_MethodName: MenuPress
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &2078816123
 GameObject:
   m_ObjectHideFlags: 0
@@ -5671,6 +6206,7 @@ GameObject:
   - component: {fileID: 2127852327}
   - component: {fileID: 2127852326}
   - component: {fileID: 2127852325}
+  - component: {fileID: 2127852329}
   m_Layer: 5
   m_Name: CreditsButton
   m_TagString: Untagged
@@ -5694,8 +6230,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 191.99997, y: -135.0838}
-  m_SizeDelta: {x: 384, y: 90.05587}
+  m_AnchoredPosition: {x: 191.99997, y: -135.05821}
+  m_SizeDelta: {x: 384, y: 90.03881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2127852325
 MonoBehaviour:
@@ -5710,6 +6246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 10
   spawningSpeed: 10
+  menuNavigate: {fileID: 8300000, guid: 9acbf999a81134348bf44105ba5794f8, type: 3}
+  menuPress: {fileID: 8300000, guid: 5db7dc18457eca6419fc5b9a17a306ee, type: 3}
 --- !u!114 &2127852326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5771,6 +6309,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2127852325}
+        m_MethodName: MenuPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2127852327
@@ -5807,3 +6356,33 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2127852323}
   m_CullTransparentMesh: 0
+--- !u!114 &2127852329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2127852323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2127852325}
+          m_MethodName: MenuNavigate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []

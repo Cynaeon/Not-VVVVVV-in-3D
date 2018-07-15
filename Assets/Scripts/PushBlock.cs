@@ -6,11 +6,13 @@ public class PushBlock : MonoBehaviour {
 
     public float speed;
     public ParticleSystem particles_push;
-
+    public AudioClip sliding;
     private bool moving;
     private Vector3 moveTarget;
+    private AudioSource _audio;
 
 	void Awake () {
+        _audio = GetComponent<AudioSource>();
         moveTarget = transform.position;
 	}
 	
@@ -41,6 +43,11 @@ public class PushBlock : MonoBehaviour {
         {
             if (hit.transform.tag == "PushPanel")
             {
+                if (_audio)
+                {
+                    _audio.pitch = 1.6f;
+                    _audio.PlayOneShot(sliding);
+                }
                 moveTarget += dir * 2;
             }
         }

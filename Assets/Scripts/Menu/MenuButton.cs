@@ -6,13 +6,17 @@ public class MenuButton : MonoBehaviour {
 
     public float scaleSpeed = 10;
     public float spawningSpeed = 30;
+    public AudioClip menuNavigate;
+    public AudioClip menuPress;
 
     private float delay;
     private float time;
     private float scale;
+    private AudioSource _audio;
 
     void Start()
     {
+        _audio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
         delay = transform.GetSiblingIndex();
     }
 
@@ -34,4 +38,16 @@ public class MenuButton : MonoBehaviour {
         scale = Mathf.Clamp(scale, 0, 1);
         transform.localScale = new Vector3(scale, 1, 1);
 	}
+
+    public void MenuNavigate()
+    {
+        if (_audio)
+            _audio.PlayOneShot(menuNavigate);
+    }
+
+    public void MenuPress()
+    {
+        if (_audio)
+            _audio.PlayOneShot(menuPress);
+    }
 }

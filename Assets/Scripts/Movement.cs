@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour {
     public AudioClip respawned;
     public AudioClip freeze;
     public AudioClip death;
+    public AudioClip bell;
 
     // Temp variables (hopefully) (not really xd)
     private bool onGravityBlock;
@@ -153,6 +154,8 @@ public class Movement : MonoBehaviour {
 
     IEnumerator Blast()
     {
+        _audio.pitch = 1;
+        _audio.PlayOneShot(bell);
         blastTrigger.SetActive(true);
         ParticleSystem blast = Instantiate(particlesBlast, transform.position, Quaternion.identity);
         blast.transform.parent = transform;

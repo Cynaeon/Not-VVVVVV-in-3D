@@ -44,9 +44,13 @@ public class DropLevelObjects : MonoBehaviour {
             yield return null;
         }
         levelObject.position = new Vector3(levelObject.position.x, startPos.y - dropDistance, levelObject.position.z);
-        float pitch = Random.Range(0.2f, 0.8f);
+        float vol = Random.Range(0.1f, 0.4f);
         AudioSource source = levelObject.GetComponent<AudioSource>();
-        source.PlayOneShot(blockLanding, pitch);
+        if (source)
+        {
+            source.pitch = Random.Range(.5f, 1f);
+            source.PlayOneShot(blockLanding, vol);
+        }
 
     }
 }

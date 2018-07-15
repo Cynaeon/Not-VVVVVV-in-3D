@@ -128,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1922481974617900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 1, z: -10}
+  m_LocalPosition: {x: -15, y: 1, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4719783389373630}
@@ -386,6 +386,9 @@ MonoBehaviour:
   jumpLanding: {fileID: 8300000, guid: 225b9111bbf1887468ca8863c0c99f0e, type: 3}
   respawning: {fileID: 8300000, guid: 12a8316dca2239146a88076b6b98ccd0, type: 3}
   respawned: {fileID: 8300000, guid: 281616098a6c7b44eb8a531e43daaa4e, type: 3}
+  freeze: {fileID: 8300000, guid: 9994bd47671d8e54c86b34a3f295ac32, type: 3}
+  death: {fileID: 8300000, guid: 3fed1e0b2526552428c462f5188b1b45, type: 3}
+  bell: {fileID: 8300000, guid: 2f2512d3bb9e0aa408b907c3d4b98bb9, type: 3}
 --- !u!135 &135981022508143244
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -408,7 +411,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
+  m_Height: 0.7
   m_Radius: 0.35
   m_SlopeLimit: 0
   m_StepOffset: 0.5
