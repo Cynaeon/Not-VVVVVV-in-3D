@@ -8,11 +8,11 @@ public class DropLevelObjects : MonoBehaviour {
     public float dropInterval = 0.05f;
     public int dropDistance = 40;
 
+    public AudioClip blockLanding;
+
     private List<Transform> levelObjects = new List<Transform>();
 
-	// Use this for initialization
 	void Start () {
-		
         for (int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).tag == "Danger" || transform.GetChild(i).tag == "PushPanel")
@@ -44,11 +44,9 @@ public class DropLevelObjects : MonoBehaviour {
             yield return null;
         }
         levelObject.position = new Vector3(levelObject.position.x, startPos.y - dropDistance, levelObject.position.z);
+        float pitch = Random.Range(0.2f, 0.8f);
+        AudioSource source = levelObject.GetComponent<AudioSource>();
+        source.PlayOneShot(blockLanding, pitch);
 
     }
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

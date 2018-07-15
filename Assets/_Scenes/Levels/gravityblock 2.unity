@@ -712,6 +712,7 @@ MonoBehaviour:
   fallSpeed: 80
   dropInterval: 0.05
   dropDistance: 40
+  blockLanding: {fileID: 8300000, guid: 08aeb37899a8fa24a8dbb1a50ab79143, type: 3}
 --- !u!4 &655283572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4362060449695982, guid: 5c51e921e2f09ba4aa086fae53d37d72,

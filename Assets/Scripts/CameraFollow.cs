@@ -17,7 +17,6 @@ public class CameraFollow : MonoBehaviour {
     public float offset = 4;
 
     private Transform target;
-    private Vector3 camPosition;
     private float camSize;
     private Vector3 offsetVector;
     private Vector3 rotation;
@@ -41,8 +40,10 @@ public class CameraFollow : MonoBehaviour {
     {
         if (target)
         {
-            camPosition = 
-            transform.position = Vector3.Lerp(transform.position, (target.position / 1.5f + -transform.forward * 30) + offsetVector, 0.1f);
+            float value = (target.position.x + target.position.z) / 2;
+            Vector3 middlePoint = new Vector3(value, 0, value);
+            Vector3 camPosition = (target.position + middlePoint) / 2;
+            transform.position = Vector3.Lerp(transform.position, (camPosition + -transform.forward * 30) + offsetVector, 0.1f);
         }
 
         horizontal = Input.GetAxisRaw("Right_Horizontal");

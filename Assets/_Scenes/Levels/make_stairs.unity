@@ -1281,6 +1281,7 @@ MonoBehaviour:
   fallSpeed: 80
   dropInterval: 0.05
   dropDistance: 40
+  blockLanding: {fileID: 8300000, guid: 08aeb37899a8fa24a8dbb1a50ab79143, type: 3}
 --- !u!1001 &672297149
 Prefab:
   m_ObjectHideFlags: 0

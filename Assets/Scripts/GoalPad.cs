@@ -9,15 +9,21 @@ public class GoalPad : MonoBehaviour {
     public Transform goalEffects;
     public float effectsAscendSpeed;
     public float timeUntilLevelChange;
+    public AudioClip charging;
+    public AudioClip success;
+    public AudioClip blast;
+    public AudioClip chimes;
 
     private GameObject player;
     private Vector3 pos;
     private Transform effectsInstance;
     private ParticleSystem p_instance;
+    private AudioSource _audio;
     private bool activated;
 
     void Start () {
         player = GameObject.Find("Player");
+        _audio = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -38,12 +44,19 @@ public class GoalPad : MonoBehaviour {
         if (Gravity.dirNumber == 2)
             rot = new Vector3(-90, 0, 0);
         p_instance = Instantiate(p_goal, pos, Quaternion.Euler(rot));
+        _audio.pitch = 1;
+        _audio.PlayOneShot(charging);
+        _audio.PlayOneShot(success);
         activated = true;
         yield return new WaitForSeconds(p_instance.main.duration / 2);
 
         player.GetComponent<Renderer>().enabled = false;
         yield return new WaitForSeconds(p_instance.main.duration / 2);
 
+        _audio.Stop();
+        _audio.pitch = 1.5f;
+        _audio.PlayOneShot(blast, 0.3f);
+        _audio.PlayOneShot(chimes, 0.3f);
         effectsInstance = Instantiate(goalEffects, player.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(timeUntilLevelChange);
 

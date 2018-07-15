@@ -19,6 +19,11 @@ public class Movement : MonoBehaviour {
     public ParticleSystem particlesDeath;
     public ParticleSystem particlesWarp;
     public ParticleSystem particlesSpawn;
+    public AudioClip jumpLanding;
+    public AudioClip respawning;
+    public AudioClip respawned;
+    public AudioClip freeze;
+    public AudioClip death;
 
     // Temp variables (hopefully) (not really xd)
     private bool onGravityBlock;
@@ -34,11 +39,13 @@ public class Movement : MonoBehaviour {
     private Vector3 movement;
     private float verticalMovement;
     private ParticleSystem p_instance;
+    private AudioSource _audio;
 
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         _rend = GetComponent<Renderer>();
+        _audio = GetComponent<AudioSource>();
         _rend.enabled = false;
         disableInput = true;
         blastTrigger.SetActive(false);
@@ -60,7 +67,14 @@ public class Movement : MonoBehaviour {
         {
             // Reset vertical movement and jump count and allow gravity changing
             if (verticalMovement < 0)
+            {
+                if (verticalMovement < -0.5f)
+                {
+                    _audio.pitch = 2;
+                    _audio.PlayOneShot(jumpLanding, -verticalMovement / 3);
+                }
                 verticalMovement = 0;
+            }
             midairJumpCount = 0;
 
             if (Input.GetButtonDown("GravityRight"))
@@ -148,12 +162,16 @@ public class Movement : MonoBehaviour {
 
     IEnumerator Die()
     {
+        _audio.pitch = 0.75f;
+        _audio.PlayOneShot(freeze);
         Instantiate(particlesBuildUp, transform.position, Quaternion.identity);
         dead = true;
         Time.timeScale = 0;
         EventManager.TriggerEvent("playerDeath");
         yield return new WaitForSecondsRealtime(freezeTime);
 
+        _audio.Stop();
+        _audio.PlayOneShot(death, 1);
         Time.timeScale = 1;
         EventManager.TriggerEvent("freezeEnd");
         Instantiate(particlesDeath, transform.position, Quaternion.identity);
@@ -166,6 +184,8 @@ public class Movement : MonoBehaviour {
 
     IEnumerator Respawn()
     {
+        _audio.pitch = 1.5f;
+        _audio.PlayOneShot(respawning);
         Vector3 startPos;
         if (GameObject.FindGameObjectWithTag("Respawn")) 
             startPos = GameObject.FindGameObjectWithTag("Respawn").transform.position;
@@ -173,6 +193,7 @@ public class Movement : MonoBehaviour {
             startPos = new Vector3(-10, 1, -10);
         transform.position = startPos;
         Gravity.dirNumber = 0;
+        verticalMovement = 0;
         startPos.y = 15;
         p_instance = Instantiate(particlesWarp, startPos, Quaternion.identity);
         yield return new WaitForSeconds(p_instance.main.duration - .1f);
@@ -183,6 +204,8 @@ public class Movement : MonoBehaviour {
         trail.SetActive(true);
         dead = false;
         disableInput = false;
+        _audio.Stop();
+        _audio.PlayOneShot(respawned);
     }
 
     /*
