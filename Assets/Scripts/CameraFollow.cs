@@ -41,7 +41,19 @@ public class CameraFollow : MonoBehaviour {
         if (target)
         {
             float value = (target.position.x + target.position.z) / 2;
-            Vector3 middlePoint = new Vector3(value, 0, value);
+            Vector3 middlePoint = Vector3.zero;
+            switch (Gravity.dirNumber)
+            {
+                case 0:
+                    middlePoint = new Vector3(value, 0, value);
+                    break;
+                case 1: 
+                    middlePoint = new Vector3(0, -value, value);
+                    break;
+                case 2:
+                    middlePoint = new Vector3(value, -value, 0);
+                    break;
+            }
             Vector3 camPosition = (target.position + middlePoint) / 2;
             transform.position = Vector3.Lerp(transform.position, (camPosition + -transform.forward * 30) + offsetVector, 0.1f);
         }
