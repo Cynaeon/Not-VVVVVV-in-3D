@@ -6,17 +6,18 @@ public class Lamp : MonoBehaviour {
 
     public Light lampLight;
 
-    private bool lit = true;
+    private bool lit = false;
     private Material _material;
+    private Material _parentMaterial;
 
 	void Start () {
         _material = GetComponent<Renderer>().material;
+        _parentMaterial = transform.parent.GetComponent<Renderer>().material;
 	}
 
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.Q))
-            Toggle();
+        
     }
 
     public void Toggle()
@@ -25,12 +26,14 @@ public class Lamp : MonoBehaviour {
         {
             lampLight.enabled = true;
             _material.EnableKeyword("_EMISSION");
+            _parentMaterial.EnableKeyword("_EMISSION");
             lit = true;
         }
         else
         {
             lampLight.enabled = false;
             _material.DisableKeyword("_EMISSION");
+            _parentMaterial.DisableKeyword("_EMISSION");
             lit = false;
         }
     }
