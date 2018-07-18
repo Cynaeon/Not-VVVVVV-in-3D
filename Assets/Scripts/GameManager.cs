@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
     public int currentLevel;
 
+    public static float gameTime;
+
     private void Awake()
     {
         if (instance == null)
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour {
 
         SaveData data = new SaveData();
         data.currentLevel = currentLevel;
+        data.gameTime = gameTime;
 
         bf.Serialize(file, data);
         file.Close();
@@ -49,7 +52,13 @@ public class GameManager : MonoBehaviour {
             file.Close();
 
             currentLevel = data.currentLevel;
+            gameTime = data.gameTime;
         }
+    }
+
+    public void Update()
+    {
+        gameTime += Time.deltaTime;
     }
 }
 
@@ -57,4 +66,5 @@ public class GameManager : MonoBehaviour {
 class SaveData
 {
     public int currentLevel;
+    public float gameTime;
 }
