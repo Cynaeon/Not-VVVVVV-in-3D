@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d24e6dc156b4b4aaaf94700075dc66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 2
+  rotationSpeed: 1.5
   cameraSway: 0
   swayLength: 0
   swaySpeed: 0
