@@ -81,6 +81,18 @@ EditorBuildSettings:
     path: Assets/_Scenes/Levels/lights 2.unity
     guid: 7c8628eda4e89584f8fbc2607d404988
   - enabled: 1
+    path: Assets/_Scenes/Levels/moving_danger.unity
+    guid: 4628b72833692254a9d7801581d7e5ee
+  - enabled: 1
+    path: Assets/_Scenes/Levels/moving_danger 2.unity
+    guid: 52405ad42120197429815e25b1d6d182
+  - enabled: 1
+    path: Assets/_Scenes/Levels/void.unity
+    guid: c1e22055de2465a4da3f87a63a258913
+  - enabled: 1
+    path: Assets/_Scenes/Levels/void 2.unity
+    guid: aa2302875f1ddd341ba37b2a85f7c9cf
+  - enabled: 1
     path: Assets/_Scenes/end.unity
     guid: 17f36a7ead5886a49a73e0fb6e4ea310
   m_configObjects: {}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -58,7 +59,8 @@ public class GameManager : MonoBehaviour {
 
     public void Update()
     {
-        gameTime += Time.deltaTime;
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+            gameTime += Time.deltaTime;
     }
 }
 

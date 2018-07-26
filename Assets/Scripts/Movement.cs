@@ -61,7 +61,7 @@ public class Movement : MonoBehaviour {
     private void PlayerInput()
     {
         // Fail-safe if the player falls out of bounds
-        if (Vector3.Magnitude(transform.position) > 40)
+        if (Vector3.Magnitude(transform.position) > 36)
             StartCoroutine(Die());
 
         if (IsGrounded() || (!IsGrounded() && onGravityBlock))
@@ -197,7 +197,7 @@ public class Movement : MonoBehaviour {
         transform.position = startPos;
         Gravity.dirNumber = 0;
         verticalMovement = 0;
-        startPos.y = 15;
+        startPos.y = 25;
         p_instance = Instantiate(particlesWarp, startPos, Quaternion.identity);
         yield return new WaitForSeconds(p_instance.main.duration - .1f);
 

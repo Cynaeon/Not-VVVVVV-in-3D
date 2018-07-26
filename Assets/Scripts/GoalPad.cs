@@ -38,11 +38,20 @@ public class GoalPad : MonoBehaviour {
     {
         Vector3 rot = Vector3.zero;
         if (Gravity.dirNumber == 0)
+        {
             rot = new Vector3(0, 0, 0);
-        if (Gravity.dirNumber == 1)
+            pos.y += 24;
+        }
+        else if (Gravity.dirNumber == 1)
+        {
             rot = new Vector3(0, 0, -90);
-        if (Gravity.dirNumber == 2)
+            pos.x -= 24;
+        }
+        else if (Gravity.dirNumber == 2)
+        {
             rot = new Vector3(-90, 0, 0);
+            pos.z -= 24;
+        }
         p_instance = Instantiate(p_goal, pos, Quaternion.Euler(rot));
         _audio.pitch = 1;
         _audio.PlayOneShot(charging);
@@ -57,6 +66,7 @@ public class GoalPad : MonoBehaviour {
         _audio.pitch = 1.5f;
         _audio.PlayOneShot(blast, 0.3f);
         _audio.PlayOneShot(chimes, 0.3f);
+        
         effectsInstance = Instantiate(goalEffects, player.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(timeUntilLevelChange);
 
