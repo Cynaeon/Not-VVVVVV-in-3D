@@ -5,17 +5,23 @@ using UnityEngine.Playables;
 
 public class IntroTimeline : MonoBehaviour {
 
-    private PlayableDirector pd;
+    public GameObject menu;
 
-	// Use this for initialization
+    private PlayableDirector pd;
+    private bool menuActivated;
+
 	void Start () {
         pd = GetComponent<PlayableDirector>();
-        
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-        if (pd.state == PlayState.Playing && Input.anyKeyDown)
+        if (!menuActivated && pd.time >= 4)
+        {
+            menu.SetActive(true);
+            menuActivated = true;
+        }
+
+        else if (!menuActivated && pd.state == PlayState.Playing && Input.anyKeyDown)
         {
             pd.time = pd.duration;
         }

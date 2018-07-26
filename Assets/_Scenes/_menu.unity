@@ -283,7 +283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &74746263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5587,6 +5587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6720081d368dea84bbc8a3124cb2b2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 74746262}
 --- !u!320 &1665267154
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -5663,7 +5664,7 @@ PlayableDirector:
     value: {fileID: 539756663}
   - key: {fileID: 114678481108980088, guid: 87d76f75343677046a50ff810c596687, type: 2}
     value: {fileID: 8273907}
-  - key: {fileID: 114763793172266506, guid: 87d76f75343677046a50ff810c596687, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 74746262}
   - key: {fileID: 114237290707690486, guid: 87d76f75343677046a50ff810c596687, type: 2}
     value: {fileID: 1810379472}
